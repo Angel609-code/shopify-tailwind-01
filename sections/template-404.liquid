@@ -1,0 +1,63 @@
+{% liquid 
+  assign default_title = 'general.404.title' | t 
+  assign default_subtext_title = 'general.404.subtext_html' | t
+
+  if section.settings.button_url == blank
+    assign shop_url = shop.secure_url
+  else
+    assign shop_url = section.settings.button_url
+  endif
+%}
+
+<div class="max-w-md">
+  <div class="text-5xl font-bold my-4" >
+    {{ section.settings.title | default: default_title }}
+  </div>
+  <div class="my-4">
+    <p class="text-base md:text-xl leading-normal">
+      {{ section.settings.subtext_title | default: default_subtext_title }}
+    </p>
+  </div>
+  <div class="my-10">
+    <a href="{{ shop_url }}"
+      class="px-4 inline py-3 text-base font-medium shadow bg-green-600 hover:bg-green-800 text-white rounded-lg">
+      {{ section.settings.button_label }}
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Template 404",
+  "tag": "section",
+  "class": "flex items-center justify-center text-center py-7 h-screen",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtext_title",
+      "label": "Subtext title"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Back to homepage"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button url"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Template 404"
+    }
+  ]
+}
+{% endschema %}
