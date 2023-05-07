@@ -1,0 +1,34 @@
+<div class="w-full py-6 px-3">
+  <div class="border bg-white shadow-lg rounded-lg overflow-hidden">
+    <a href="{{ _product.url | within: collection }}">
+      {% if _product.featured_image %}
+        <div class="h-80 overflow-hidden">
+          <img
+            src="{{ _product.featured_image.src | image_url }}"
+            alt="{{ _product.featured_image.alt | escape }}"
+            loading="lazy"
+            width="100"
+            height="100"
+            class="w-full h-full object-cover transition decoration-1000 ease-in-out hover:scale-105 transform"
+          >
+        </div>
+      {% else %}
+        <div class="h-80 overflow-hidden bg-blue-100">
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover transition decoration-1000 ease-in-out hover:scale-105 transform' }}
+        </div>
+      {% endif %}
+    </a>
+    <div class="flex flex-col p-5">
+      <span class="text-sm capitalize">{{ _product.vendor }}</span>
+      <a href="{{ _product.url | within: collection }}" class="text-gray-700 uppercase font-medium">
+        {{- _product.title -}}
+      </a>
+
+      <p class="text-gray-500">{{ _product.price | money }}</p>
+
+      {% unless _product.available -%}
+        <strong class="capitalize-first text-red-500">sold out</strong>
+      {%- endunless %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="px-4 py-8">
+  {% paginate collection.products by section.settings.number_of_products_per_page %}
+    <h2 class="text-3xl text-center">{{ collection.title }}</h2>
+
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% for product in collection.products %}
+          {% render 'product-card', _product: product %}
+        {% else %}
+          <p>There are no product inside of this collection</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% render 'pagination', pagination: paginate %}
+  {% endpaginate %}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "number_of_products_per_page",
+      "label": "Blog posts per page",
+      "step": 1,
+      "min": 1,
+      "max": 12,
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection"
+    }
+  ]
+}
+{% endschema %}
