@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-page",
+      "settings": {
+      }
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "title": "Contact Us"
+      }
+    }
+  },
+  "order": [
+    "template",
+    "contact"
+  ]
+}
